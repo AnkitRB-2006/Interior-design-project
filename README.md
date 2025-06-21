@@ -1,2 +1,2 @@
 # Interior-design-project
-AR. Interior Designing
+AR. Interior
