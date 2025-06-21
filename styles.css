@@ -1,0 +1,640 @@
+:root {
+    --theme-green: #48A36D;
+    --theme-yellow: #F5C542;
+    --dark-green: #024139; /* Your existing body background */
+    --light-grey-bg: #f8f9fa; /* A very light background color for aesthetic section */
+    --card-bg: #ffffff; /* Card background color for aesthetic section */
+    --text-color: #333; /* Darker text for readability in aesthetic section */
+    --light-text-color: #6c757d; /* Lighter secondary text in aesthetic section */
+    scroll-padding-top: 120px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #024139;
+    color: #222;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: #024139;
+    padding-top: 0.25rem; /* Equivalent to py-1 */
+    padding-bottom: 0.25rem; /* Equivalent to py-1 */
+}
+
+.header-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    max-height: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Original .nav-links styles - these are likely superseded by Bootstrap's .navbar-nav */
+/* If you are using Bootstrap's default navbar structure, these .nav-links rules might be redundant
+   or need to be adjusted to target .navbar-nav and .nav-item .nav-link */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px; /* You might adjust spacing with Bootstrap utilities or custom CSS on .nav-item */
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply your link styling to Bootstrap's nav-link class */
+.navbar-nav .nav-item .nav-link {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: var(--theme-yellow);
+    border-bottom: 2px solid var(--theme-yellow);
+}
+
+/* Responsive adjustments for Bootstrap's collapsed navbar */
+@media (max-width: 991.98px) { /* Adjust breakpoint if navbar-expand-lg is changed */
+    .navbar-nav {
+        flex-direction: column; /* Stack items vertically in collapsed menu */
+        text-align: center; /* Center text in collapsed menu */
+    }
+    .navbar-nav .nav-item {
+        margin: 5px 0; /* Add some vertical spacing */
+    }
+    .navbar-nav .nav-item .nav-link {
+        padding: 8px 15px; /* Adjust padding for collapsed items */
+        border-bottom: none; /* Remove bottom border from collapsed items */
+    }
+    .navbar-nav .nav-item .nav-link:hover {
+        border-bottom: none; /* Remove bottom border hover from collapsed items */
+    }
+}
+
+.hero-section-custom {
+    /* Remove background-image from here as it's now handled by .hero-collage-background */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    background-color: var(--dark-green); /* Use --dark-green variable */
+    overflow: hidden; /* Important for containing absolutely positioned children */
+}
+
+.hero-section-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2; /* Ensure the overlay is above the collage but below content */
+}
+
+.hero-content-custom {
+    z-index: 3; /* Ensure content is on top */
+    padding: 2rem;
+    border-radius: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hero-section-custom a.btn-primary {
+    background-color: var(--theme-green);
+    border-color: var(--theme-green);
+    color: white;
+}
+
+.hero-section-custom a.btn-primary:hover {
+    background-color: var(--dark-green); /* Use --dark-green variable */
+    border-color: var(--dark-green); /* Use --dark-green variable */
+}
+
+/* CSS for the Hero section image collage background */
+.hero-collage-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid; /* Use CSS Grid for a collage layout */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive columns */
+    grid-gap: 5px; /* Gap between images */
+    overflow: hidden;
+    z-index: 1; /* Position behind the content and overlay */
+}
+
+.hero-collage-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    filter: grayscale(50%) brightness(80%); /* Optional: Add a subtle effect */
+    transition: filter 0.3s ease;
+}
+
+.hero-collage-background img:hover {
+    filter: grayscale(0%) brightness(100%); /* Optional: Effect on hover */
+}
+
+/* Adjust grid for smaller screens if needed */
+@media (max-width: 768px) {
+    .hero-collage-background {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Fewer columns on small screens */
+        grid-gap: 3px;
+    }
+}
+
+/* Styles for the About section collage - DRAMATIC ENHANCEMENTS */
+.about-collage-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 4 / 5;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #e0e6ec, #f8f9fa);
+    /* Removed overflow: hidden; here to allow hover pop to break container boundaries */
+}
+
+.about-collage-container img {
+    position: absolute;
+    display: block;
+    filter: grayscale(10%) brightness(90%) contrast(110%);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Elastic pop for hover */
+                filter 0.4s ease-out,
+                box-shadow 0.4s ease,
+                border-radius 0.4s ease,
+                object-fit 0.4s ease; /* Transition for object-fit */
+    z-index: 2;
+    overflow: hidden; /* Keeps image within its own shape boundary, but content can escape on scale if parent overflow is visible */
+
+    /* Ensure initial transform is handled by the animation 0% state */
+    opacity: 0; /* Starts hidden, revealed by dramaticImageEntrance */
+    transform: scale(0.1); /* Minimal initial scale for the animation to build upon */
+
+    animation: dramaticImageEntrance 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards, /* Colossal bounce entrance */
+               continuousBounce 6s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate; /* Continuous bouncing like a ball */
+    object-fit: cover; /* Default state */
+}
+
+/* Keyframes for dramatic image entrance (more 'bouncy' and 'colossal' ending) */
+@keyframes dramaticImageEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.1) translateY(200px) rotateY(-90deg) rotateX(30deg);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.3) translateY(-30px) rotateY(0deg) rotateX(0deg); /* Overshoot significantly */
+    }
+    85% {
+        transform: scale(0.95) translateY(10px); /* Bounce back slightly below final size */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotateY(0deg) rotateX(0deg);
+    }
+}
+
+/* Keyframes for continuous bouncing inside the box (like a ball) */
+/* Increased translate values for more noticeable bounce */
+@keyframes continuousBounce {
+    0% { transform: translate(0px, 0px) rotate(0deg); } /* Starting point relative to its absolute position */
+    25% { transform: translate(var(--bounce-x-1), var(--bounce-y-1)) rotate(var(--bounce-rot-1, 0deg)); }
+    50% { transform: translate(var(--bounce-x-2), var(--bounce-y-2)) rotate(var(--bounce-rot-2, 0deg)); }
+    75% { transform: translate(var(--bounce-x-3), var(--bounce-y-3)) rotate(var(--bounce-rot-3, 0deg)); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+/* Specific positioning, unique shapes (flower-like), and initial angles for each photo */
+/* Also define custom properties for bouncing with slightly larger ranges */
+.about-collage-container img:nth-child(1) {
+    top: 5%; left: 3%;
+    width: 65%; height: 60%;
+    border-radius: 60% 40% 70% 30% / 30% 70% 30% 70%; /* Flower shape */
+    animation-delay: 0.1s;
+    z-index: 5;
+    --bounce-x-1: 50px; --bounce-y-1: 40px; --bounce-rot-1: 5deg;
+    --bounce-x-2: -25px; --bounce-y-2: -20px; --bounce-rot-2: -4deg;
+    --bounce-x-3: 15px; --bounce-y-3: 10px; --bounce-rot-3: 2deg;
+}
+
+.about-collage-container img:nth-child(2) {
+    top: 0%; right: 0%;
+    width: 48%; height: 48%;
+    border-radius: 40% 70% 50% 60% / 70% 40% 60% 50%; /* Flower shape */
+    animation-delay: 0.2s;
+    z-index: 4;
+    --bounce-x-1: -40px; --bounce-y-1: 30px; --bounce-rot-1: -6deg;
+    --bounce-x-2: 20px; --bounce-y-2: -50px; --bounce-rot-2: 4deg;
+    --bounce-x-3: -10px; --bounce-y-3: 20px; --bounce-rot-3: -2deg;
+}
+
+.about-collage-container img:nth-child(3) {
+    bottom: 0%; left: 35%;
+    width: 45%; height: 55%;
+    border-radius: 70% 30% 40% 60% / 50% 60% 40% 50%; /* Flower shape */
+    animation-delay: 0.3s;
+    z-index: 3;
+    --bounce-x-1: 30px; --bounce-y-1: -40px; --bounce-rot-1: 3deg;
+    --bounce-x-2: -50px; --bounce-y-2: 20px; --bounce-rot-2: -5deg;
+    --bounce-x-3: 10px; --bounce-y-3: -10px; --bounce-rot-3: 1deg;
+}
+
+.about-collage-container img:nth-child(4) {
+    bottom: 12%; left: -5%;
+    width: 40%; height: 40%;
+    border-radius: 30% 60% 70% 40% / 60% 30% 50% 70%; /* Flower shape */
+    animation-delay: 0.4s;
+    z-index: 2;
+    --bounce-x-1: 50px; --bounce-y-1: -10px; --bounce-rot-1: 6deg;
+    --bounce-x-2: -20px; --bounce-y-2: 35px; --bounce-rot-2: -4deg;
+    --bounce-x-3: 15px; --bounce-y-3: -25px; --bounce-rot-3: 3deg;
+}
+
+.about-collage-container img:nth-child(5) {
+    top: 35%; left: 25%;
+    width: 35%; height: 35%;
+    border-radius: 50% 50% 80% 20% / 50% 80% 20% 50%; /* Flower shape */
+    z-index: 6;
+    animation-delay: 0.5s;
+    --bounce-x-1: -20px; --bounce-y-1: -30px; --bounce-rot-1: -2deg;
+    --bounce-x-2: 40px; --bounce-y-2: 20px; --bounce-rot-2: 5deg;
+    --bounce-x-3: -15px; --bounce-y-3: -10px; --bounce-rot-3: -1deg;
+}
+
+/* More dramatic hover effects for individual images - Colossal & Glowing */
+/* Now also "pop" and "show whole image" while maintaining flower shape */
+.about-collage-container img:hover {
+    transform: scale(1.3) rotate(0deg) translateY(0px) !important; /* Increased scale for more dramatic pop */
+    filter: grayscale(0%) brightness(130%) contrast(140%);
+    box-shadow: 0 0 80px rgba(72, 163, 109, 1),
+                0 0 50px rgba(245, 197, 66, 0.9),
+                0 0 30px rgba(255, 255, 255, 0.9),
+                0 0 10px rgba(72, 163, 109, 0.5) inset;
+    z-index: 10;
+    /* Maintain flower-like shape on hover */
+    border-radius: 60% 40% 70% 30% / 30% 70% 30% 70%; /* Example flower shape for hover */
+    object-fit: contain; /* Show whole image, not cropped */
+    animation: none; /* Pause continuous animation on hover */
+}
+
+/* Optional: Add a subtle border or frame effect on hover using pseudo-elements */
+.about-collage-container img::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 0px solid transparent;
+    border-radius: inherit; /* Inherit the flower shape */
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition for ripple */
+    z-index: 1;
+}
+
+.about-collage-container img:hover::before {
+    opacity: 1;
+    transform: scale(1.05); /* Expansive ripple-like effect, slightly less than image scale */
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.3),
+                0 0 0 30px rgba(255, 255, 255, 0.1);
+    border-radius: inherit; /* Maintain flower shape on hover for pseudo-element */
+}
+
+/* ... (rest of your existing CSS, including responsive adjustments and other sections) ... */
+
+/* General card and portfolio item styling */
+section h2,
+.card-title,
+.card h3 { /* Combined common heading styles */
+    color: var(--theme-green);
+}
+
+.card {
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(72, 163, 109, 0.15);
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-item img {
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 0.75rem;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+#message {
+    resize: none;
+}
+
+/* NEW Aesthetic Contact Section Styling - Replaces old .contact-section */
+.aesthetic-contact-section {
+    background: linear-gradient(135deg, var(--light-grey-bg) 0%, #024139 100%);
+    color: var(--text-color);
+    padding: 80px 0;
+}
+
+.aesthetic-contact-section .section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark-green);
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.aesthetic-contact-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--theme-yellow);
+    border-radius: 2px;
+}
+
+/* Card Styling for Form and Info within aesthetic contact section */
+.contact-form-card,
+.contact-info-card {
+    background-color: var(--card-bg);
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form-card:hover,
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Styling within aesthetic contact section */
+.aesthetic-contact-section .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: #fcfcfc;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aesthetic-contact-section .form-control:focus {
+    border-color: var(--theme-green);
+    box-shadow: 0 0 0 0.25rem rgba(72, 163, 109, 0.25);
+    outline: none;
+}
+
+.aesthetic-contact-section .form-label {
+    font-weight: 500;
+    color: var(--dark-green);
+    margin-bottom: 0.5rem;
+}
+
+/* Custom Button Styling within aesthetic contact section */
+.btn-primary-custom {
+    background-color: var(--theme-green);
+    border-color: var(--theme-green);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: #3a8a5b;
+    border-color: #3a8a5b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary-custom:active {
+    transform: translateY(0);
+}
+
+/* Contact Details Styling within aesthetic contact section */
+.contact-details {
+    padding-left: 0;
+}
+
+.contact-details li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--light-text-color);
+}
+
+.contact-details .icon {
+    font-size: 1.5rem;
+    color: var(--theme-yellow);
+    margin-right: 1rem;
+    width: 30px;
+    text-align: center;
+}
+
+/* Map Container Styling within aesthetic contact section */
+.map-container-contact {
+    height: 300px;
+    border: 2px solid #ddd;
+    border-radius: 0.75rem; /* Match card border-radius */
+    overflow: hidden; /* Ensures the iframe respects the border-radius */
+}
+
+.map-container-contact iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.75rem; /* Apply border-radius directly to iframe for consistency */
+    border: 0; /* Remove default iframe border */
+}
+
+/* Simple Fade-in Animation on Scroll (Optional JavaScript needed for trigger) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.delay-1 { transition-delay: 0.1s; }
+.fade-in.delay-2 { transition-delay: 0.2s; }
+.fade-in.delay-3 { transition-delay: 0.3s; }
+
+
+/* Footer Styling */
+.footer {
+    background-color: #0c0c0c;
+    color: #ffffff;
+    padding: 40px 20px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    gap: 40px;
+}
+
+.footer-column {
+    flex: 1 1 200px;
+    min-width: 200px;
+}
+
+.footer-column h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    border-bottom: 1px solid var(--theme-yellow);
+    padding-bottom: 8px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: var(--theme-yellow);
+}
+
+.logo-column .footer-logo {
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+.footer-column p {
+    font-size: 14px;
+    color: #bbb;
+}
+
+.social-icons a {
+    color: #ccc;
+    margin-right: 10px;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #888;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+/* Original Footer Map Container Styling */
+.map-container {
+    border-radius: 0.75rem; /* Rounded corners for the map */
+    overflow: hidden; /* Ensures the iframe respects the border-radius */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    height: 200px; /* Specific height for the footer map */
+    margin-top: 10px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.75rem; /* Apply border-radius directly to iframe for consistency */
+    border: 0; /* Remove default iframe border */
+}
+
+/* Original .nav-links media queries - (likely superseded by Bootstrap's navbar-expand-lg) */
+/* This block should generally be reviewed if you're using Bootstrap's default responsive navbar */
+@media (max-width: 991.98px) {
+    .nav-links {
+        /* display: none; */ /* Hidden on smaller screens due to Bootstrap's toggler */
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+    .nav-links.show {
+        display: flex;
+    }
+    .nav-links li {
+        width: 100%;
+        text-align: left;
+        margin: 10px 0;
+    }
+}
